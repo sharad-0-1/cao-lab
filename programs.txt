@@ -1,0 +1,368 @@
+------------------------------------------
+Exp 1: Addition of two 8-bit numbers
+;<Program title>
+
+jmp start
+
+;data
+
+
+;code
+start: nop
+MVI A, 4
+MVI B, 3
+ADD B
+STA 0000h
+hlt
+------------------------------------------
+
+Exp 2: Addition of three 8-bit numbers
+;<Program title>
+
+jmp start
+
+;data
+
+
+;code
+start: nop
+MVI A, 4
+MVI B, 3
+MVI C, 6
+ADD B
+ADD C
+STA 0000h
+hlt
+------------------------------------------
+Exp 3: Addition with Carry
+;<Program title>
+
+jmp start
+
+;data
+
+
+;code
+start: nop
+MVI A, 150
+MVI B, 200
+MVI C, 0
+ADD B
+JNC skip
+INR C
+skip: STA 0000h
+MOV A, C
+STA 0001h
+hlt
+------------------------------------------
+Exp 4: Subtraction 
+;<Program title>
+
+jmp start
+
+;data
+
+
+;code
+start: nop
+MVI A, 03
+MVI B, 05
+SUB B
+STA 0000h
+
+hlt
+------------------------------------------
+Exp 5: Multiplication 
+
+;<Program title>
+
+jmp start
+
+;data
+
+
+;code
+start: nop
+MVI B, 03
+MVI C, 02
+MVI A, 0
+loop: ADD B
+skip: DCR C
+JNZ loop
+STA 0000h
+
+hlt
+------------------------------------------
+Exp 6: Multiplication with Carry
+
+;<Program title>
+
+jmp start
+
+;data
+
+
+;code
+start: nop
+MVI B, 25
+MVI C, 11
+MVI A, 0
+MVI D, 0
+loop: ADD B
+JNC skip
+INR D
+skip: DCR C
+JNZ loop
+STA 0000h
+MOV A, D
+STA 0001h
+hlt
+
+------------------------------------------
+
+Exp 7: Division
+
+;<Program title>
+
+jmp start
+
+;data
+
+;code
+start: nop
+MVI B, 07
+MVI C, 02
+MVI D, 0
+MOV A, B
+loop: CMP C
+JC break 
+SUB C
+INR D
+JMP loop
+break: STA 0000h
+MOV A, D
+STA 0001h
+hlt
+------------------------------------------
+Exp 8: 2's complement of a number
+
+;<Program title>
+
+jmp start
+
+;data
+
+
+;code
+start: nop
+MVI A, 05
+CMA 
+INR A 
+STA 0000h
+hlt
+
+------------------------------------------
+
+Exp  9: Sum of series in array
+
+;<Program title>
+
+jmp start
+
+;data
+
+
+;code
+start: nop
+LXI H, 0000h
+MOV C, M
+MVI A, 0
+
+loop: INX H
+ADD M
+DCR C
+JNZ loop
+STA 000Ah
+hlt
+
+------------------------------------------
+
+Exp 10: Search in an array
+
+;<Program title>
+
+jmp start
+
+;data
+
+
+;code
+start: nop
+LXI H, 0000h
+MOV B, M
+INX H
+MOV C, M
+MVI D, 0
+loop: INX H
+MOV A, M
+CMP B
+JNZ skip
+INR D
+JMP break
+skip: DCR C
+JNZ loop
+break: MOV A, D
+STA 000Ah
+hlt
+
+------------------------------------------
+Exp 11: Largest number in array
+
+;<Program title>
+
+jmp start
+
+;data
+
+
+;code
+start: nop
+LXI H, 0000h
+MOV C, M
+MVI B, 0
+
+loop: INX H
+MOV A, M
+CMP B
+JNC skip
+MOV B, A
+
+skip: DCR C
+JNZ loop
+
+MOV A, B
+STA 000Ah
+hlt
+
+------------------------------------------
+Exp 12: Smallest number in array
+
+;<Program title>
+
+jmp start
+
+;data
+
+
+;code
+start: nop
+LXI H, 0000h
+MOV C, M
+INX H
+MOV B, M
+DCR C
+loop: INX H
+MOV A, M
+CMP B
+JNC skip
+MOV B, A
+
+skip: DCR C
+JNZ loop
+
+MOV A, B
+STA 000Ah
+hlt
+
+------------------------------------------
+Exp 13: Sort in Ascending Order
+
+;<Program title>
+
+jmp start
+
+;data
+
+
+;code
+start: nop
+LXI H, 0000h
+MOV C, M
+DCR C
+loopi: MOV D, C
+LXI H, 0001h
+
+loopj: MOV A, M
+INX H
+CMP M
+JC skip
+MOV B, M
+MOV M, A
+DCX H
+MOV M, B
+INX H
+
+skip: DCR D
+JNZ loopj
+
+DCR C
+JNZ loopi
+hlt
+
+------------------------------------------
+
+Exp 14: Sort in Descending Order
+
+;<Program title>
+
+jmp start
+
+;data
+
+
+;code
+start: nop
+LXI H, 0000h
+MOV C, M
+DCR C
+loopi: MOV D, C
+LXI H, 0001h
+
+loopj: MOV A, M
+INX H
+CMP M
+JNC skip
+MOV B, M
+MOV M, A
+DCX H
+MOV M, B
+INX H
+
+skip: DCR D
+JNZ loopj
+
+DCR C
+JNZ loopi
+hlt
+
+------------------------------------------
+
+Exp 15: Find square using Lookup Table
+
+;<Program title>
+
+jmp start
+
+;data
+
+
+;code
+start: nop
+MVI B, 05
+LXI H, 0000h
+MOV L, B
+MOV A, M
+STA 000Fh
+hlt
+
+------------------------------------------
